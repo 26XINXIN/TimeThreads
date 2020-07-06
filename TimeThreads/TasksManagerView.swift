@@ -36,44 +36,24 @@ struct TaskView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            HStack {
-                Image(uiImage: UIImage(systemName: "rays")!)
+            if self.task.level == 0 {
+                Text(self.task.label)
+                    .font(Font.system(size: self.fontSize(for: geometry.size)))
+                    .headify()
+            } else {
                 Text(self.task.label).cardify()
+                .frame(minWidth: nil, idealWidth: geometry.size.width - 10, maxWidth: geometry.size.width - 10, minHeight: geometry.size.height, idealHeight: geometry.size.height, maxHeight: 2 * geometry.size.height, alignment: .topLeading)
+                .padding(5)
+                .padding(.leading, 20 * CGFloat(self.task.level-1))
             }
-            .frame(minWidth: nil, idealWidth: geometry.size.width - 10, maxWidth: geometry.size.width - 10, minHeight: geometry.size.height, idealHeight: geometry.size.height, maxHeight: 2 * geometry.size.height, alignment: .topLeading)
-            .padding(5)
-            .padding(.leading, 20 * CGFloat(self.task.level))
         }
         
     }
     
-
-    
-    
+    private func fontSize(for size: CGSize) -> CGFloat { min(size.width, size.height) * 0.9 }
 }
 
 
-struct Cardify: ViewModifier {
-    
-    func body(content: Content) -> some View {
-        ZStack(alignment: .topLeading) {
-            RoundedRectangle(cornerRadius: 10.0)
-                .foregroundColor(.blue)
-                .opacity(0.5)
-            content
-                .padding(5)
-            
-        }
-        .frame(height: 40)
-        .padding(3)
-    }
-}
-
-extension View {
-    func cardify() -> some View {
-        self.modifier(Cardify())
-    }
-}
 
 
 

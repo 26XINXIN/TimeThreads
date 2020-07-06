@@ -16,12 +16,11 @@ struct TaskTree {
     }
     
     static func generateTestTask() -> TaskTree {
-        let idGen = UUID()
-        let task = TaskInfo(id: idGen.uuidString, label: "main task", subTask: nil, level: 0)
-        let subTask1 = TaskInfo(id: idGen.uuidString, label: "sub task 1", subTask: nil, level: 1)
-        subTask1.addSubTask(task: TaskInfo(id: idGen.uuidString, label: "sub sub task 1", subTask: nil, level: 0))
+        let task = TaskInfo(id: UUID().uuidString, label: "main task", subTask: nil, level: 0)
+        let subTask1 = TaskInfo(id: UUID().uuidString, label: "sub task 1", subTask: nil, level: 1)
+        subTask1.addSubTask(task: TaskInfo(id: UUID().uuidString, label: "sub sub task 1", subTask: nil, level: 0))
         task.addSubTask(task: subTask1)
-        task.addSubTask(task: TaskInfo(id: idGen.uuidString, label: "sub task 2", subTask: nil, level: 0))
+        task.addSubTask(task: TaskInfo(id: UUID().uuidString, label: "sub task 2", subTask: nil, level: 0))
         return TaskTree(rootTask: task)
     }
 }

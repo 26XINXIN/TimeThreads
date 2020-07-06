@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A530634324B2B6CA0037FD6B /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A530634224B2B6CA0037FD6B /* Cardify.swift */; };
+		A57D539724B2F866004317ED /* TaskModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D539624B2F866004317ED /* TaskModifiers.swift */; };
 		A5DC724024B27D1500E86A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC723F24B27D1500E86A39 /* AppDelegate.swift */; };
 		A5DC724224B27D1500E86A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC724124B27D1500E86A39 /* SceneDelegate.swift */; };
 		A5DC724524B27D1500E86A39 /* TimeThreads.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5DC724324B27D1500E86A39 /* TimeThreads.xcdatamodeld */; };
@@ -21,7 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A530634224B2B6CA0037FD6B /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
+		A57D539624B2F866004317ED /* TaskModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModifiers.swift; sourceTree = "<group>"; };
 		A5DC723C24B27D1500E86A39 /* TimeThreads.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeThreads.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5DC723F24B27D1500E86A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5DC724124B27D1500E86A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,7 +70,7 @@
 				A5DC725624B27E2700E86A39 /* TasksManagerView.swift */,
 				A5DC725824B27F0300E86A39 /* TaskManagerController.swift */,
 				A5DC725A24B27F4400E86A39 /* TaskTree.swift */,
-				A530634224B2B6CA0037FD6B /* Cardify.swift */,
+				A57D539624B2F866004317ED /* TaskModifiers.swift */,
 				A5DC724824B27D1A00E86A39 /* Assets.xcassets */,
 				A5DC723F24B27D1500E86A39 /* AppDelegate.swift */,
 				A5DC724124B27D1500E86A39 /* SceneDelegate.swift */,
@@ -163,10 +163,10 @@
 			files = (
 				A5DC725924B27F0300E86A39 /* TaskManagerController.swift in Sources */,
 				A5DC724024B27D1500E86A39 /* AppDelegate.swift in Sources */,
-				A530634324B2B6CA0037FD6B /* Cardify.swift in Sources */,
 				A5DC725B24B27F4400E86A39 /* TaskTree.swift in Sources */,
 				A5DC724524B27D1500E86A39 /* TimeThreads.xcdatamodeld in Sources */,
 				A5DC724724B27D1500E86A39 /* ContentView.swift in Sources */,
+				A57D539724B2F866004317ED /* TaskModifiers.swift in Sources */,
 				A5DC724224B27D1500E86A39 /* SceneDelegate.swift in Sources */,
 				A5DC725724B27E2700E86A39 /* TasksManagerView.swift in Sources */,
 			);
