@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A530634324B2B6CA0037FD6B /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A530634224B2B6CA0037FD6B /* Cardify.swift */; };
 		A5DC724024B27D1500E86A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC723F24B27D1500E86A39 /* AppDelegate.swift */; };
 		A5DC724224B27D1500E86A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC724124B27D1500E86A39 /* SceneDelegate.swift */; };
 		A5DC724524B27D1500E86A39 /* TimeThreads.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5DC724324B27D1500E86A39 /* TimeThreads.xcdatamodeld */; };
@@ -14,9 +15,13 @@
 		A5DC724924B27D1A00E86A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5DC724824B27D1A00E86A39 /* Assets.xcassets */; };
 		A5DC724C24B27D1A00E86A39 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5DC724B24B27D1A00E86A39 /* Preview Assets.xcassets */; };
 		A5DC724F24B27D1A00E86A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5DC724D24B27D1A00E86A39 /* LaunchScreen.storyboard */; };
+		A5DC725724B27E2700E86A39 /* TasksManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC725624B27E2700E86A39 /* TasksManagerView.swift */; };
+		A5DC725924B27F0300E86A39 /* TaskManagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC725824B27F0300E86A39 /* TaskManagerController.swift */; };
+		A5DC725B24B27F4400E86A39 /* TaskTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC725A24B27F4400E86A39 /* TaskTree.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A530634224B2B6CA0037FD6B /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
 		A5DC723C24B27D1500E86A39 /* TimeThreads.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeThreads.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5DC723F24B27D1500E86A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5DC724124B27D1500E86A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +31,9 @@
 		A5DC724B24B27D1A00E86A39 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A5DC724E24B27D1A00E86A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A5DC725024B27D1A00E86A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5DC725624B27E2700E86A39 /* TasksManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksManagerView.swift; sourceTree = "<group>"; };
+		A5DC725824B27F0300E86A39 /* TaskManagerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerController.swift; sourceTree = "<group>"; };
+		A5DC725A24B27F4400E86A39 /* TaskTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTree.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,10 +66,14 @@
 		A5DC723E24B27D1500E86A39 /* TimeThreads */ = {
 			isa = PBXGroup;
 			children = (
+				A5DC724624B27D1500E86A39 /* ContentView.swift */,
+				A5DC725624B27E2700E86A39 /* TasksManagerView.swift */,
+				A5DC725824B27F0300E86A39 /* TaskManagerController.swift */,
+				A5DC725A24B27F4400E86A39 /* TaskTree.swift */,
+				A530634224B2B6CA0037FD6B /* Cardify.swift */,
+				A5DC724824B27D1A00E86A39 /* Assets.xcassets */,
 				A5DC723F24B27D1500E86A39 /* AppDelegate.swift */,
 				A5DC724124B27D1500E86A39 /* SceneDelegate.swift */,
-				A5DC724624B27D1500E86A39 /* ContentView.swift */,
-				A5DC724824B27D1A00E86A39 /* Assets.xcassets */,
 				A5DC724D24B27D1A00E86A39 /* LaunchScreen.storyboard */,
 				A5DC725024B27D1A00E86A39 /* Info.plist */,
 				A5DC724324B27D1500E86A39 /* TimeThreads.xcdatamodeld */,
@@ -149,10 +161,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5DC725924B27F0300E86A39 /* TaskManagerController.swift in Sources */,
 				A5DC724024B27D1500E86A39 /* AppDelegate.swift in Sources */,
+				A530634324B2B6CA0037FD6B /* Cardify.swift in Sources */,
+				A5DC725B24B27F4400E86A39 /* TaskTree.swift in Sources */,
 				A5DC724524B27D1500E86A39 /* TimeThreads.xcdatamodeld in Sources */,
 				A5DC724724B27D1500E86A39 /* ContentView.swift in Sources */,
 				A5DC724224B27D1500E86A39 /* SceneDelegate.swift in Sources */,
+				A5DC725724B27E2700E86A39 /* TasksManagerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
