@@ -22,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		A57D539624B2F866004317ED /* TaskModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModifiers.swift; sourceTree = "<group>"; };
+		A5BC9A4F24B2FD5C00965C9A /* ChangeLog.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ChangeLog.md; sourceTree = "<group>"; };
 		A5DC723C24B27D1500E86A39 /* TimeThreads.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeThreads.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5DC723F24B27D1500E86A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5DC724124B27D1500E86A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 			children = (
 				A5DC724624B27D1500E86A39 /* ContentView.swift */,
 				A5DC725624B27E2700E86A39 /* TasksManagerView.swift */,
+				A5BC9A4F24B2FD5C00965C9A /* ChangeLog.md */,
 				A5DC725824B27F0300E86A39 /* TaskManagerController.swift */,
 				A5DC725A24B27F4400E86A39 /* TaskTree.swift */,
 				A57D539624B2F866004317ED /* TaskModifiers.swift */,
