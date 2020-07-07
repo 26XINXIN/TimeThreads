@@ -1,6 +1,6 @@
 #  Change Log
 
-## 20200706
+## 20200705
 
 - [x] Baseline View for Task Thread
 
@@ -13,3 +13,9 @@ Focus on interactions between user and task model
 - [ ] Delete task
 - [ ] Reorganize task
 
+## 20200706
+
+- [x] Add new task
+- [ ] Edit task label
+- [ ] Delete task
+- [ ] Reorganize task

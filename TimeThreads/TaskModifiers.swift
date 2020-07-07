@@ -17,7 +17,6 @@ struct Cardify: ViewModifier {
                 .opacity(0.5)
             content
                 .padding(5)
-            
         }
         .frame(height: 40)
         .padding(3)

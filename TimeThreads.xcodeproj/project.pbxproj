@@ -67,9 +67,9 @@
 		A5DC723E24B27D1500E86A39 /* TimeThreads */ = {
 			isa = PBXGroup;
 			children = (
+				A5BC9A4F24B2FD5C00965C9A /* ChangeLog.md */,
 				A5DC724624B27D1500E86A39 /* ContentView.swift */,
 				A5DC725624B27E2700E86A39 /* TasksManagerView.swift */,
-				A5BC9A4F24B2FD5C00965C9A /* ChangeLog.md */,
 				A5DC725824B27F0300E86A39 /* TaskManagerController.swift */,
 				A5DC725A24B27F4400E86A39 /* TaskTree.swift */,
 				A57D539624B2F866004317ED /* TaskModifiers.swift */,

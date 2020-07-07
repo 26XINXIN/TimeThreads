@@ -15,6 +15,24 @@ struct TaskTree {
         rootTask.preOrderTraverse()
     }
     
+    func findTaskNode(id: String) -> TaskInfo? {
+        findTaskNode(id: id, root: rootTask)
+    }
+    
+    private func findTaskNode(id: String, root: TaskInfo) -> TaskInfo? {
+        if root.id == id {
+            return root
+        }
+        if root.subTasks != nil {
+            for subTask in root.subTasks! {
+                if let found = findTaskNode(id: id, root: subTask) {
+                    return found
+                }
+            }
+        }
+        return nil
+    }
+    
     static func generateTestTask() -> TaskTree {
         let task = TaskInfo(id: UUID().uuidString, label: "main task", subTask: nil, level: 0)
         let subTask1 = TaskInfo(id: UUID().uuidString, label: "sub task 1", subTask: nil, level: 1)
@@ -25,11 +43,12 @@ struct TaskTree {
     }
 }
 
-class TaskInfo: Identifiable {
+class TaskInfo: Identifiable, Codable {
     var id: String
     private(set) var label: String
-    private(set) var subTasks: Array<TaskInfo>?
+    var subTasks: Array<TaskInfo>?
     private(set) var level = 0
+    private(set) var parentID: String?
     
     init(id: String, label: String, subTask: Array<TaskInfo>?, level: Int){
         self.id = id
@@ -49,12 +68,26 @@ class TaskInfo: Identifiable {
     }
     
     func addSubTask(task: TaskInfo) {
+        task.parentID = id
         if subTasks != nil {
             subTasks!.append(task)
         } else {
             subTasks = [task]
         }
         task.setLevel(level: level + 1)
+    }
+    
+    func addSubTask(_ newTask: TaskInfo, after node: TaskInfo) {
+        newTask.setLevel(level: level + 1)
+        if subTasks != nil {
+            if let found = subTasks!.firstIndex(where: { element in element.id == node.id}) {
+                subTasks!.insert(newTask, at: found + 1)
+            } else {
+                print("precedence node not found: \(node.id)")
+            }
+        } else {
+            subTasks = [newTask]
+        }
     }
     
     func setLevel(level: Int) {

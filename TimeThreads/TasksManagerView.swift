@@ -17,6 +17,10 @@ struct TasksManagerView: View {
                 ForEach(self.manager.listTasks(), id: \.id) { task in
                         TaskView(task: task)
                             .frame(minWidth: nil, idealWidth: self.screenWidth - 10, maxWidth: self.screenWidth - 10, minHeight: self.lineHeight, idealHeight: self.lineHeight, maxHeight: 2 * self.lineHeight, alignment: .topLeading)
+                        .onTapGesture(count: 2) {
+                            // TODO: user create new task
+                            self.manager.addSiblingTask(TaskInfo(id: UUID().uuidString, label: "new task (TODO)", subTask: nil, level: 0), after: task)
+                        }
                 }
             }
         }
@@ -47,7 +51,6 @@ struct TaskView: View {
                 .padding(.leading, 20 * CGFloat(self.task.level-1))
             }
         }
-        
     }
     
     private func fontSize(for size: CGSize) -> CGFloat { min(size.width, size.height) * 0.9 }
