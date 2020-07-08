@@ -79,6 +79,40 @@ class TaskManagerController: ObservableObject {
         DispatchQueue.main.async {
             self.objectWillChange.send()
         }
-        
+    }
+    
+    func addSubTask(_ newTask: TaskInfo, of parent: TaskInfo) {
+        print("adding subtask")
+        if let trueParent = task.findTaskNode(id: parent.id) {
+            trueParent.addSubTask(task: newTask)
+            // TODO: bad change signal
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        } else {
+            print("ID error")
+        }
+    }
+    
+    func deleteTask(_ deletedTask: TaskInfo) {
+        if let trueTask = task.findTaskNode(id: deletedTask.id) {
+            if trueTask.parentID == nil {
+                print("Error: can not delete root task")
+                return
+            }
+            
+            if let parent = task.findTaskNode(id: trueTask.parentID!) {
+                parent.removeSubTask(trueTask)
+            } else {
+                print("Error: parent not found")
+                return
+            }
+            // TODO: bad change signal
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        } else {
+            print("ID error")
+        }
     }
 }

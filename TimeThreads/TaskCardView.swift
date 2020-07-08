@@ -10,14 +10,17 @@ import SwiftUI
 
 struct TaskCardView: View {
     var task: TaskInfo
+    private var manager: TaskManagerController
     
     @State private var expanded: Bool = false
+    @State private var shortcutBottonExpanded: Bool = true
     
     @State private var taskLabel: String = ""
     
-    init(task content: TaskInfo) {
-        task = content
-        taskLabel = content.label
+    init(task content: TaskInfo, manager: TaskManagerController) {
+        self.task = content
+        self.manager = manager
+        self.taskLabel = content.label
     }
     
     var body: some View {
@@ -28,35 +31,58 @@ struct TaskCardView: View {
             VStack {
                 if self.expanded {
                     TextField("\(self.task.label)", text: self.$taskLabel)
+                        .textFieldStyle(PlainTextFieldStyle())
                         .padding(.leading, 5)
-                        .frame(width: self.maxWidth, height: minHeight, alignment: .leading)
-                        .position(x: self.maxWidth / 2, y: self.minHeight / 2)
+                        .frame(width: cardWidth, height: lineHeight, alignment: .leading)
+                        .position(x: cardWidth / 2, y: self.lineHeight / 2)
                     HStack{
-                        ButtonView(label: "Apply", width: 90, height: 40, fontSize: 15, color: Color.green) {
+                        ButtonView(label: "Apply", width: buttonWidth, height: buttonHeight, fontSize: buttonFontSize, color: Color.green) {
+                            // TODO: editing button
                             self.expanded = false
                         }
-                        ButtonView(label: "Discard", width: 90, height: 40, fontSize: 15, color: Color.red) {
+                        ButtonView(label: "Discard", width: buttonWidth, height: buttonHeight, fontSize: buttonFontSize, color: Color.red) {
+                            // TODO: editing button
                             self.expanded = false
                         }
                     }
                 } else {
-                    Text(self.task.label)
-                        .padding(.leading, 5)
-                        .frame(width: self.maxWidth, height: minHeight, alignment: .leading)
-                        .position(x: self.maxWidth / 2, y: self.minHeight / 2)
+                    HStack {
+                        Text(self.task.label)
+                        .padding(.leading, edgePaddingSize)
+                        .frame(width: cardWidth - shortcutButtonWidth - edgePaddingSize, height: lineHeight, alignment: .leading)
+                        .position(x: (cardWidth - shortcutButtonWidth - edgePaddingSize) / 2, y: self.lineHeight / 2)
                         .onLongPressGesture {
                             self.expanded = true
                         }
+                        if shortcutBottonExpanded {
+                            Image(systemName: "plus").font(.system(size: shortcutButtonSize, weight: .regular))
+                                .onTapGesture {
+                                    // TODO: editing new task
+                                    self.manager.addSubTask(TaskInfo(id: UUID().uuidString, label: "new child"), of: self.task)
+                                }
+                            Image(systemName: "minus").font(.system(size: shortcutButtonSize, weight: .regular))
+                                .onTapGesture {
+                                    self.manager.deleteTask(self.task)
+                                }
+                        }
+                        Image(systemName: "square.grid.2x2").font(.system(size: shortcutButtonSize, weight: .regular))
+                            .padding(.trailing, edgePaddingSize)
+                            .onTapGesture {
+                                self.shortcutBottonExpanded = !self.shortcutBottonExpanded
+                            }
+                    }
+                    
                 }
             }
+                .padding(.vertical, verticalPaddingSize)
             
         }
-        .font(Font.system(size: self.fontSize))
-        .frame(minWidth: nil, idealWidth: self.maxWidth, maxWidth: self.maxWidth,
-               minHeight: self.minHeight, idealHeight: nil, maxHeight: nil,
-                   alignment: .topLeading)
-            .padding(.horizontal, self.horizontalPaddingSize)
-            .padding(.leading, self.indentSize * CGFloat(max(self.task.level-1, 0)))
+            .font(Font.system(size: fontSize))
+            .frame(width: cardWidth, height: cardHeight)
+            .padding(.horizontal, horizontalPaddingSize)
+            
+            .padding(.leading, indentSize)
+            
         
             
     }
@@ -64,11 +90,29 @@ struct TaskCardView: View {
     
     // MARK: Constants
     
-    private let minHeight: CGFloat = 40
-    private let maxHeight: CGFloat = 60
+    private let lineHeight: CGFloat = 40
     private let maxWidth: CGFloat = UIScreen.main.bounds.width
+    private var cardWidth: CGFloat {
+        return maxWidth - indentSize - 2 * horizontalPaddingSize
+    }
+    private var cardHeight: CGFloat {
+        if expanded {
+            return lineHeight + buttonHeight + 2 * verticalPaddingSize
+        } else {
+            return lineHeight + 2 * verticalPaddingSize
+        }
+    }
+    
+    private let shortcutButtonSize: CGFloat = 20
+    private var shortcutButtonWidth: CGFloat { 3 * shortcutButtonSize }
+    
+    private let buttonHeight: CGFloat = 40
+    private let buttonWidth: CGFloat = 90
+    private let buttonFontSize: CGFloat = 15
     
     private let horizontalPaddingSize: CGFloat = 5
+    private let verticalPaddingSize: CGFloat = 5
+    private let edgePaddingSize: CGFloat = 5
     
     private let fontSize: CGFloat = 20
     
@@ -76,12 +120,18 @@ struct TaskCardView: View {
     private let cardOpacity: Double = 0.5
     private let cardCornerRaduis: CGFloat = 10.0
     
-    private let indentSize: CGFloat = 20
+    private let indentSizePerLevel: CGFloat = 20
+    private var indentSize: CGFloat {
+        indentSizePerLevel * CGFloat(max(task.level-1, 0))
+    }
+    
+    
     
 }
 
 struct TaskCardView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskCardView(task: TaskInfo(id: "1", label: "test", level: 1))
+        let manager = TaskManagerController()
+        return TaskCardView(task: TaskInfo(id: "1", label: "test", level: 2), manager: manager)
     }
 }

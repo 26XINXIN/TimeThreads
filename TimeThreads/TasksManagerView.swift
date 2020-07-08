@@ -35,27 +35,29 @@ struct TasksManagerView: View {
                 }
             ScrollView(.vertical) {
                 ForEach(taskList[1..<taskList.count], id: \.id) { task in
-                    TaskCardView(task: TaskInfo(id: task.id, label: task.label, level: task.level - self.rootLevel))
-                        .onTapGesture(count: 2) { // TODO: - not finalized gesture
-                            // TODO: - user create new task
-                            self.manager.addSiblingTask(TaskInfo(id: UUID().uuidString, label: "new task (TODO)", level: task.level), after: task)
-                        }
-                        .onDrop(of: ["public.text"], isTargeted: nil) { providers, location in
-                            var changed = false
-                            let _ = providers.first!.loadObject(ofClass: String.self) { id, err in
-                                if id != nil {
-                                    if let insertedTask = self.manager.getTaskById(id!) {
-                                        self.manager.move(insertedTask, before: task)
-                                        changed = true
-                                    }
+                    TaskCardView(task: TaskInfo(id: task.id, label: task.label, level: task.level - self.rootLevel), manager: self.manager)
+                    .onTapGesture(count: 2) { // TODO: - not finalized gesture
+                        // TODO: - user create new task
+                        self.manager.addSiblingTask(TaskInfo(id: UUID().uuidString, label: "new task (TODO)", level: task.level), after: task)
+                    }
+                    .onDrop(of: ["public.text"], isTargeted: nil) { providers, location in
+                        var changed = false
+                        let _ = providers.first!.loadObject(ofClass: String.self) { id, err in
+                            if id != nil {
+                                if let insertedTask = self.manager.getTaskById(id!) {
+                                    self.manager.move(insertedTask, before: task)
+                                    changed = true
                                 }
                             }
-                            return changed
                         }
-                        .onDrag {NSItemProvider(object: task.id as NSString)}
+                        return changed
+                    }
+                    .onDrag {NSItemProvider(object: task.id as NSString)}
                 }
+                
             }
                 .edgesIgnoringSafeArea(.bottom)
+                .animation(.linear)
         }
     }
     
