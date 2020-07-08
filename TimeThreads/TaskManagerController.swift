@@ -14,10 +14,15 @@ class TaskManagerController: ObservableObject {
     
     // MARK: - Access to Data
     
-    func listTasks() -> Array<TaskInfo> {
-        let taskList = task.preOrderTraverse()
-        print("\(taskList)")
-        return taskList
+    var rootTask: TaskInfo { task.rootTask }
+    var taskList: [TaskInfo] { listTasks(rooted: rootTask) }
+    
+    func listTasks(rooted root: TaskInfo) -> Array<TaskInfo> {
+        task.preOrderTraverse(rooted: root)
+    }
+    
+    func getTaskById(_ id: String) -> TaskInfo? {
+        task.findTaskNode(id: id)
     }
     
     // MARK: - Intents
@@ -37,5 +42,43 @@ class TaskManagerController: ObservableObject {
         
         // TODO: bad change signal
         objectWillChange.send()
+    }
+    
+    func move(_ insertedTask: TaskInfo, before successor: TaskInfo) {
+        if insertedTask.id == successor.id {
+            print("no movement")
+            return
+        }
+        if insertedTask.parentID == nil {
+            print("Error: Can not move root node")
+            return
+        }
+        if successor.parentID == nil {
+            print("Error: Can not inserted to root node")
+            return
+        }
+        if successor.parentID == insertedTask.id {
+            print("Error: moving task to its subTask list is not allowed")
+            return
+        }
+        
+        let srcParent = task.findTaskNode(id: insertedTask.parentID!)
+        let dstParent = task.findTaskNode(id: successor.parentID!)
+        
+        if srcParent == nil || dstParent == nil {
+            print("Error: Parent not found")
+            return
+        }
+        
+        // delete from previous tree
+        srcParent!.removeSubTask(insertedTask)
+        // insert to new
+        dstParent!.addSubTask(insertedTask, before: successor)
+        
+        // TODO: bad change signal
+        DispatchQueue.main.async {
+            self.objectWillChange.send()
+        }
+        
     }
 }

@@ -11,20 +11,52 @@ import SwiftUI
 struct TasksManagerView: View {
     @ObservedObject var manager: TaskManagerController
     
+    @State var rootTask: TaskInfo
+    private var taskList: [TaskInfo] { manager.listTasks(rooted: rootTask) }
+    private var rootLevel: Int { rootTask.level }
+    
     var body: some View {
-        GeometryReader { geometry in
-            ScrollView(.vertical) {
-                ForEach(self.manager.listTasks(), id: \.id) { task in
-                        TaskView(task: task)
-                            .frame(minWidth: nil, idealWidth: self.screenWidth - 10, maxWidth: self.screenWidth - 10, minHeight: self.lineHeight, idealHeight: self.lineHeight, maxHeight: 2 * self.lineHeight, alignment: .topLeading)
-                        .onTapGesture(count: 2) {
-                            // TODO: user create new task
-                            self.manager.addSiblingTask(TaskInfo(id: UUID().uuidString, label: "new task (TODO)", subTask: nil, level: 0), after: task)
+        VStack {
+            TaskHeadingView(task: taskList.first!)
+                .onDrop(of: ["public.text"], isTargeted: nil) { providers, location in
+                    var changed = false
+                    let _ = providers.first!.loadObject(ofClass: String.self) { id, err in
+                        if id != nil {
+                            if let newRootTask = self.manager.getTaskById(id!) {
+                                self.rootTask = newRootTask
+                                changed = true
+                            }
                         }
+                    }
+                    return changed
+                }
+                .onTapGesture(count: 2) {
+                    self.rootTask = self.manager.rootTask
+                }
+            ScrollView(.vertical) {
+                ForEach(taskList[1..<taskList.count], id: \.id) { task in
+                    TaskCardView(task: TaskInfo(id: task.id, label: task.label, level: task.level - self.rootLevel))
+                        .onTapGesture(count: 2) { // TODO: - not finalized gesture
+                            // TODO: - user create new task
+                            self.manager.addSiblingTask(TaskInfo(id: UUID().uuidString, label: "new task (TODO)", level: task.level), after: task)
+                        }
+                        .onDrop(of: ["public.text"], isTargeted: nil) { providers, location in
+                            var changed = false
+                            let _ = providers.first!.loadObject(ofClass: String.self) { id, err in
+                                if id != nil {
+                                    if let insertedTask = self.manager.getTaskById(id!) {
+                                        self.manager.move(insertedTask, before: task)
+                                        changed = true
+                                    }
+                                }
+                            }
+                            return changed
+                        }
+                        .onDrag {NSItemProvider(object: task.id as NSString)}
                 }
             }
+                .edgesIgnoringSafeArea(.bottom)
         }
-        .edgesIgnoringSafeArea(.bottom)
     }
     
     // MARK: - Constant(s)
@@ -35,33 +67,11 @@ struct TasksManagerView: View {
 }
 
 
-struct TaskView: View {
-    var task: TaskInfo
-    
-    var body: some View {
-        GeometryReader { geometry in
-            if self.task.level == 0 {
-                Text(self.task.label)
-                    .font(Font.system(size: self.fontSize(for: geometry.size)))
-                    .headify()
-            } else {
-                Text(self.task.label).cardify()
-                .frame(minWidth: nil, idealWidth: geometry.size.width - 10, maxWidth: geometry.size.width - 10, minHeight: geometry.size.height, idealHeight: geometry.size.height, maxHeight: 2 * geometry.size.height, alignment: .topLeading)
-                .padding(5)
-                .padding(.leading, 20 * CGFloat(self.task.level-1))
-            }
-        }
-    }
-    
-    private func fontSize(for size: CGSize) -> CGFloat { min(size.width, size.height) * 0.9 }
-}
-
-
-
 
 
 struct TasksManagerView_Previews: PreviewProvider {
     static var previews: some View {
-        TasksManagerView(manager: TaskManagerController())
+        let controller = TaskManagerController()
+        return TasksManagerView(manager: controller, rootTask: controller.rootTask)
     }
 }
