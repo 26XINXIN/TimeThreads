@@ -28,7 +28,6 @@ class TaskManagerController: ObservableObject {
     // MARK: - Intents
     
     func addSiblingTask(_ newTask: TaskInfo, after node: TaskInfo) {
-        print("adding new task")
         if node.parentID == nil {
             print("Adding task on root level: not allowed")
             return
@@ -39,7 +38,6 @@ class TaskManagerController: ObservableObject {
         } else {
             parent!.addSubTask(newTask, after: node)
         }
-        
         // TODO: bad change signal
         objectWillChange.send()
     }
@@ -81,6 +79,43 @@ class TaskManagerController: ObservableObject {
         }
     }
     
+    func move(_ insertedTask: TaskInfo, after precedence: TaskInfo) {
+        if insertedTask.id == precedence.id {
+            print("no movement")
+            return
+        }
+        if insertedTask.parentID == nil {
+            print("Error: Can not move root node")
+            return
+        }
+        if precedence.parentID == nil {
+            print("Error: Can not inserted to root node")
+            return
+        }
+        if precedence.parentID == insertedTask.id {
+            print("Error: moving task to its subTask list is not allowed")
+            return
+        }
+        
+        let srcParent = task.findTaskNode(id: insertedTask.parentID!)
+        let dstParent = task.findTaskNode(id: precedence.parentID!)
+        
+        if srcParent == nil || dstParent == nil {
+            print("Error: Parent not found")
+            return
+        }
+        
+        // delete from previous tree
+        srcParent!.removeSubTask(insertedTask)
+        // insert to new
+        dstParent!.addSubTask(insertedTask, after: precedence)
+        
+        // TODO: bad change signal
+        DispatchQueue.main.async {
+            self.objectWillChange.send()
+        }
+    }
+    
     func addSubTask(_ newTask: TaskInfo, of parent: TaskInfo) {
         print("adding subtask")
         if let trueParent = task.findTaskNode(id: parent.id) {
@@ -113,6 +148,60 @@ class TaskManagerController: ObservableObject {
             }
         } else {
             print("ID error")
+        }
+    }
+    
+    func updateTask(_ updatedTask: TaskInfo, label: String? = nil) {
+        if let trueTask = task.findTaskNode(id: updatedTask.id) {
+            trueTask.update(label: label)
+            // TODO: bad change signal
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        } else {
+            print("Error: task not found")
+        }
+    }
+    
+    func changeExpansion(task expandedTask: TaskInfo) {
+        task.changeExpansion(task: expandedTask)
+        // TODO: bad change signal
+        DispatchQueue.main.async {
+            self.objectWillChange.send()
+        }
+    }
+    
+    func changeButtonsExpansion(task expandedTask: TaskInfo) {
+        task.changeButtonsExpansion(task: expandedTask)
+        // TODO: bad change signal
+        DispatchQueue.main.async {
+            self.objectWillChange.send()
+        }
+    }
+    
+    func editing(task editedTask: TaskInfo) {
+        for tmpTask in task.preOrderTraverse(rooted: rootTask) {
+            if tmpTask.id == editedTask.id {
+                tmpTask.editing = true
+            } else {
+                tmpTask.editing = false
+            }
+        }
+        // TODO: bad change signal
+        DispatchQueue.main.async {
+            self.objectWillChange.send()
+        }
+    }
+    
+    func unEditing(task editedTask: TaskInfo) {
+        if let trueTask = task.findTaskNode(id: editedTask.id) {
+            trueTask.editing = false
+            // TODO: bad change signal
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        } else {
+            print("Error: task not found")
         }
     }
 }

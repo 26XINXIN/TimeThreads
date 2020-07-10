@@ -14,30 +14,24 @@ struct TaskHeadingView: View {
     var body: some View {
         ZStack(alignment: .center) {
             Rectangle().foregroundColor(.orange)
-                .padding(.horizontal, horizontalPaddingSize)
             Text(self.task.label)
                 .font(Font.system(size: fontSize))
-                .padding(.horizontal, horizontalPaddingSize)
         }
-            .frame(minWidth: width, idealWidth: width, maxWidth: width,
-                   minHeight: minHeight, idealHeight: minHeight, maxHeight: maxHeight,
-                   alignment: .center)
+        .frame(width: width, height: height, alignment: .center)
             
     }
     
     // MARK: - Constants
     
     var width: CGFloat = UIScreen.main.bounds.width
-    var minHeight: CGFloat = 30
-    var maxHeight: CGFloat = 60
-    var fontSize: CGFloat = 30
-    
-    var horizontalPaddingSize: CGFloat = 0
+    var height: CGFloat = 80
+    var fontSize: CGFloat = 40
+
 }
 
 struct TaskHeadingView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskHeadingView(task: TaskInfo(id: "1", label: "testtetsetsetsetstsetsetestsetsetsetsetsetestst", level: 3))
+        TaskHeadingView(task: TaskInfo(id: "1", label: "test", level: 3))
     }
 }
 
