@@ -10,6 +10,11 @@
 - [x] Add sub task
 - [x] Newly added task be expanded
 - [x] Refrained TaskCard interaction and UI
-- [ ] Changed task tree be 3-level structure: target-task-subTask
-- [ ] Add time consuming estimation on TaskInfo and related views
-- [ ] Refrained Model part: to fit the needs
+- [x] Changed task tree be 3-level structure: target-task-subTask
+- [x] Refrained Model part: to fit the needs
+- [x] Implement subTask addition and edition
+- [x] Debug case: newly added task cannot set label at the first time
+- [ ] drag and drop of the subTasks
+- [ ] deleting subTask
+- [ ] Interaction of tasks: new, move, delete
+- [ ] Add time consuming estimation on Tasks and related views

@@ -1,5 +1,5 @@
 //
-//  TaskHeadingView.swift
+//  TargetView.swift
 //  TimeThreads
 //
 //  Created by 杨鑫 on 2020/7/7.
@@ -8,13 +8,13 @@
 
 import SwiftUI
 
-struct TaskHeadingView: View {
-    var task: TaskInfo
+struct TargetView: View {
+    var target: Target
     
     var body: some View {
         ZStack(alignment: .center) {
             Rectangle().foregroundColor(.orange)
-            Text(self.task.label)
+            Text(self.target.label)
                 .font(Font.system(size: fontSize))
         }
         .frame(width: width, height: height, alignment: .center)
@@ -29,9 +29,9 @@ struct TaskHeadingView: View {
 
 }
 
-struct TaskHeadingView_Previews: PreviewProvider {
+struct TargetView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskHeadingView(task: TaskInfo(id: "1", label: "test", level: 3))
+        TargetView(target: Target(label: "test"))
     }
 }
 
