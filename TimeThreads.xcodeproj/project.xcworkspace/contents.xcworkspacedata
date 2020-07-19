@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:TimeThreads.xcodeproj">
+      location = "group:../TimeThreads/Model/Task.swift">
+   </FileRef>
+   <FileRef
+      location = "group:../TimeThreads/Task.swift">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

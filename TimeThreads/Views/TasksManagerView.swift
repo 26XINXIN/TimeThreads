@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct TasksManagerView: View {
-    @ObservedObject var manager: TaskManagerController
+    @ObservedObject var manager: TaskManagerViewModel
     
     private var target: Target { manager.target }
     private var taskList: [Task] { manager.taskList }
