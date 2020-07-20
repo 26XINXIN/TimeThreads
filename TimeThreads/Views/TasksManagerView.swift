@@ -20,23 +20,6 @@ struct TasksManagerView: View {
             ScrollView(.vertical) {
                 ForEach(taskList[0..<taskList.count], id: \.id) { task in
                     TaskCardView(task: task, manager: self.manager)
-//                        .onTapGesture(count: 2) { // TODO: - not finalized gesture
-//                            // TODO: - user create new task
-//                            self.manager.addSiblingTask(TaskInfo(id: UUID().uuidString, label: "new task (TODO)", level: task.level, expanded: true, shortcutButtonExpanded: false), after: task)
-//                        }
-//                        .onDrop(of: ["public.text"], isTargeted: nil) { providers, location in
-//                            var changed = false
-//                            let _ = providers.first!.loadObject(ofClass: String.self) { id, err in
-//                                if id != nil {
-//                                    if let insertedTask = self.manager.getTaskById(id!) {
-//                                        self.manager.move(insertedTask, before: task)
-//                                        changed = true
-//                                    }
-//                                }
-//                            }
-//                            return changed
-//                        }
-//                        .onDrag {NSItemProvider(object: task.id as NSString)}
                 }
                 Text("- Task finished -")
                     .font(Font.system(size: 15))

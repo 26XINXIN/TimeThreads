@@ -39,4 +39,8 @@ struct Time: Codable {
         time % 60
     }
     
+    func getTotalMinutes() -> Int {
+        time
+    }
+    
 }

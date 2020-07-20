@@ -9,13 +9,44 @@ import Foundation
 
 struct Task: Identifiable, Codable {
     private(set) var info: TaskInfo
-    private(set) var subTasks: [SubTask] = []
+    private(set) var subTasks: [SubTask] = [] {
+        didSet {
+            info.done = subTasks.allSatisfy { $0.info.done }
+            info.estimatedTime = subTasks.reduce(Time(0)) { res, subTask in
+                var newRes = Time(hours: res.getHour(), minutes: res.getMinute())
+                newRes.add(subTask.info.estimatedTime ?? Time(0))
+                return newRes
+            }
+            let doneTime = subTasks.reduce(0) { res, subTask in
+                res + (subTask.info.estimatedTime?.getTotalMinutes() ?? 0)
+            }
+            if info.estimatedTime!.getTotalMinutes() == 0 {
+                info.progress = 0
+            } else {
+                info.progress = Double(doneTime) / Double(info.estimatedTime!.getTotalMinutes())
+            }
+        }
+    }
     private(set) var parentID: String
     var id: String = UUID().uuidString
     
     var json: Data? {
         try? JSONEncoder().encode(self)
     }
+    
+    private var done: Bool {
+        get {
+            info.done
+        }
+        set {
+            info.done = newValue
+            for i in 0..<subTasks.count {
+                subTasks[i].undone()
+            }
+        }
+    }
+    
+    
     
     init(info: TaskInfo, parentID: String) {
         self.info = info
@@ -39,6 +70,7 @@ struct Task: Identifiable, Codable {
     // MARK: - settting data
     
     mutating func update(info: TaskInfo) {
+        // If has subTask, estimated time is immutable
         self.info = info
     }
     

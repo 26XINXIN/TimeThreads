@@ -26,4 +26,14 @@ struct SubTask: Identifiable, Codable {
     mutating func update(info: TaskInfo) {
         self.info = info
     }
+    
+    mutating func done() {
+        info.done = true
+        info.progress = 100
+    }
+    
+    mutating func undone() {
+        info.done = false
+        info.progress = 0
+    }
 }

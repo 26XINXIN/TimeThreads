@@ -9,6 +9,11 @@
 import Foundation
 
 struct TaskInfo: Codable {
+    // MARK: - editable
     var label: String? = nil
     var estimatedTime: Time? = nil
+    
+    // MARK: - computed
+    var done: Bool = false
+    var progress: Double = 0.0
 }

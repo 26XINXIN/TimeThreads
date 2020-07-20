@@ -9,23 +9,18 @@
 import SwiftUI
 
 struct TaskCardView: View {
-    var task: Task
-    private var manager: TaskManagerController
-    
-    private var expanded: Bool
-    private var editing: Bool
-    
-    @State private var taskLabel: String = ""
-    @State private var subTaskLabel: String = ""
-    
-    init(task: Task, manager: TaskManagerController) {
-        self.task = task
-        self.manager = manager
-        self.expanded = task.expanded
-        self.editing = task.editing
-        self.taskLabel = task.label
-        
+    var taskInfo: TaskInfo
+    var taskID: String
+    var viewModel: TaskManagerViewModel
+    var label: String {
+        taskInfo.label ?? "Unknown"
     }
+    var estimatedTime: Time {
+        taskInfo.estimatedTime ?? Time(0)
+    }
+    
+    @State var expanded = false
+    @State var editing = false
     
     var body: some View {
         ZStack(alignment: .center) {
@@ -35,7 +30,7 @@ struct TaskCardView: View {
             VStack(spacing: subTaskSpacing) {
                 HeadView()
                 if expanded {
-                    SubTaskListView()
+                    //SubTaskListView()
                 }
             }
         }
@@ -45,110 +40,38 @@ struct TaskCardView: View {
     @ViewBuilder
     private func HeadView() -> some View {
         HStack(alignment: .center, spacing: spacing) {
-            if editing {
-                TextField("\(self.task.label)", text: self.$taskLabel)
-                    .textFieldStyle(PlainTextFieldStyle())
-                    .font(.system(size: lineHeight))
-                    .frame(width: nil, height: lineHeight, alignment: .leading)
+            if taskInfo.done {
                 Image(systemName: "checkmark")
-                    .foregroundColor(Color.green)
                     .frame(width: shortcutButtonSize, height: shortcutButtonSize)
                     .aspectRatio(1, contentMode: .fit)
-                    .onTapGesture {
-                        let updatedLabel = self.taskLabel.count > 0 ? self.taskLabel : "Unknown task"
-                        self.manager.changeTaskLabel(updatedLabel, of: self.task)
-                        self.taskLabel = ""
-                }
-                Image(systemName: "xmark")
-                    .foregroundColor(Color.red)
-                    .frame(width: shortcutButtonSize, height: shortcutButtonSize)
-                    .aspectRatio(1, contentMode: .fit)
-                    .onTapGesture {
-                        self.manager.unediting(task: self.task)
-                        self.taskLabel = ""
-                }
             } else {
-                Text(self.task.label)
+                Text("\(Int(taskInfo.progress))%")
+                    .frame(width: shortcutButtonSize, height: shortcutButtonSize)
+                    .aspectRatio(1, contentMode: .fit)
+            }
+                
+            NavigationLink(destination: TaskListView(viewModel: viewModel, selectedTargetID: taskID)) {
+                Text(label)
                     .font(.system(size: lineHeight))
                     .frame(width: cardWidth - shortcutButtonSize - 2 * edgePaddingSize - spacing, height: lineHeight, alignment: .leading)
-                    .onLongPressGesture { self.manager.editing(task: self.task)}
+                    .onLongPressGesture {
+                        self.editing = true
+                    }
+//                    .sheet(item: $editing, content: EditingView(taskInfo: taskInfo, viewModel: viewModel)) // TODO
             }
-            Image(systemName: "chevron.down.circle")
-                .opacity(0.6)
-                .frame(width: shortcutButtonSize, height: shortcutButtonSize)
-                .aspectRatio(1, contentMode: .fit)
-                .rotationEffect(expanded ? Angle.degrees(0) : Angle.degrees(-90))
-                .onTapGesture {
-                    self.manager.changeExpansion(task: self.task)
-                }
+            
+//            Image(systemName: "chevron.down.circle")
+//                .opacity(0.6)
+//                .frame(width: shortcutButtonSize, height: shortcutButtonSize)
+//                .aspectRatio(1, contentMode: .fit)
+//                .rotationEffect(expanded ? Angle.degrees(0) : Angle.degrees(-90))
+//                .onTapGesture {
+//                    self.expanded = true
+//                }
         }
             .frame(width: cardWidth - 2 * edgePaddingSize, height: lineHeight)
     }
     
-    @ViewBuilder
-    private func SubTaskListView() -> some View {
-        ScrollView(.vertical) {
-            VStack(spacing: subTaskSpacing) {
-                ForEach(task.subTasks, id: \.id) { subTask in
-                    self.SubTaskView(subTask)
-                }
-                HStack(spacing: self.spacing) {
-                    Image(systemName: "plus.app")
-                        .frame(width: subTaskLineHeight, height: subTaskLineHeight)
-                        .aspectRatio(1, contentMode: .fit)
-                        .onTapGesture {
-                            self.manager.addNewSubTask(of: self.task)
-                        }
-                    Text("Add new subTask")
-                        .frame(width: cardWidth - subTaskLineHeight - 2 * edgePaddingSize - spacing, height: subTaskLineHeight, alignment: .leading)
-                        .opacity(0.3)
-                }
-            }
-            
-        }
-        .frame(width: cardWidth - 2 * edgePaddingSize, height: subTaskListHeight)
-    }
-    
-    @ViewBuilder
-    private func SubTaskView(_ subTask: SubTask) -> some View {
-        if subTask.editing {
-            HStack(spacing: self.spacing) {
-                TextField("\(subTask.label)", text: self.$subTaskLabel)
-                    .frame(width: cardWidth - 3 * subTaskLineHeight - 2 * edgePaddingSize - 3 * spacing, height: subTaskLineHeight, alignment: .leading)
-                    .padding(.leading, spacing + subTaskLineHeight)
-                Image(systemName: "checkmark")
-                    .foregroundColor(Color.green)
-                    .frame(width: subTaskLineHeight, height: subTaskLineHeight)
-                    .aspectRatio(1, contentMode: .fit)
-                    .onTapGesture {
-                        let updatedLabel = self.subTaskLabel.count > 0 ? self.subTaskLabel : "Unknown task"
-                        self.manager.changeSubTaskLabel(updatedLabel, of: subTask)
-                        self.subTaskLabel = ""
-                }
-                Image(systemName: "xmark")
-                    .foregroundColor(Color.red)
-                    .frame(width: subTaskLineHeight, height: subTaskLineHeight)
-                    .aspectRatio(1, contentMode: .fit)
-                    .onTapGesture {
-                        self.manager.unediting(subTask: subTask)
-                        self.subTaskLabel = ""
-                    }
-            }
-        } else  {
-            HStack(spacing: self.spacing) {
-                Image(systemName: "checkmark.circle")
-                    .frame(width: subTaskLineHeight, height: subTaskLineHeight)
-                    .aspectRatio(1, contentMode: .fit)
-                    .onTapGesture {
-                        // TODO: add subtask
-                        self.manager.addNewSubTask(of: self.task)
-                    }
-                Text(subTask.label)
-                    .frame(width: cardWidth - subTaskLineHeight - 2 * edgePaddingSize - spacing, height: subTaskLineHeight, alignment: .leading)
-                    .onLongPressGesture { self.manager.editing(subTask: subTask) }
-            }
-        }
-    }
     
     
     // MARK: Constants
@@ -170,7 +93,7 @@ struct TaskCardView: View {
         }
     }
     
-    private let shortcutButtonSize: CGFloat = 28
+    private let shortcutButtonSize: CGFloat = 32
     
     private let buttonHeight: CGFloat = 40
     private let buttonWidth: CGFloat = 90
@@ -198,9 +121,8 @@ struct TaskCardView: View {
 
 struct TaskCardView_Previews: PreviewProvider {
     static var previews: some View {
-        let manager = TaskManagerController()
-        var task = Task(label: "test", targetID: "1", expanded: true)
-        task.addSubTask(SubTask(label: "testtest", parentID: task.id, editing: false))
-        return TaskCardView(task: task, manager: manager)
+        let targetList = [Target.generateTestTask()]
+        let viewModel = TaskManagerViewModel(targetList: targetList)
+        return TaskCardView(taskInfo: targetList[0].info, taskID: targetList[0].id, viewModel: viewModel)
     }
 }
