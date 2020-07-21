@@ -10,22 +10,27 @@ import SwiftUI
 
 struct TaskListView: View {
     @ObservedObject var viewModel: TaskManagerViewModel
+    var selectedTargetID: String
     
     init(viewModel: TaskManagerViewModel, selectedTargetID: String) {
         self.viewModel = viewModel
-        self.viewModel.selectTarget(id: selectedTargetID)
+        self.selectedTargetID = selectedTargetID
     }
     
     var body: some View {
-        NavigationView {
-            ScrollView(.vertical) {
-                ForEach(viewModel.taskList, id: \.id) { task in
-                    TaskCardView(taskInfo: task.info, taskID: task.id, viewModel: self.viewModel)
+        ScrollView(.vertical) {
+            if viewModel.selectedTarget != nil {
+                ForEach(self.viewModel.selectedTarget!.tasks, id: \.id) { task in
+                    TaskCardView(taskInfo: task.info, taskID: task.id, viewModel: self.viewModel, cardType: .task)
                 }
             }
-            .navigationBarTitle(viewModel.selectedTarget!.info.label ?? "")
-            
+           
         }
+            .navigationBarTitle(Text(viewModel.selectedTarget?.info.label ?? ""))
+            .onAppear {
+                self.viewModel.selectTarget(id: self.selectedTargetID)
+                self.viewModel.unselectTask()
+            }
     }
 }
 

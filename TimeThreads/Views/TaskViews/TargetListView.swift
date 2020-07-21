@@ -11,15 +11,21 @@ import SwiftUI
 struct TargetListView: View {
     @ObservedObject var viewModel: TaskManagerViewModel
     
+    init(viewModel: TaskManagerViewModel) {
+        self.viewModel = viewModel
+    }
+    
     var body: some View {
         NavigationView {
             ScrollView(.vertical) {
                 ForEach(viewModel.targetList, id: \.id) { target in
-                    TaskCardView(taskInfo: target.info, taskID: target.id, viewModel: self.viewModel)
+                    TaskCardView(taskInfo: target.info, taskID: target.id, viewModel: self.viewModel, cardType: .target)
                 }
             }
-                .navigationBarTitle("Targets")
-            
+            .navigationBarTitle(Text("Targets"))
+            .onAppear {
+                self.viewModel.unselectTarget()
+            }
         }
     }
 }

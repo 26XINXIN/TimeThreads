@@ -63,7 +63,7 @@ class TaskManagerViewModel: ObservableObject {
             return
         }
         if targetIndex == nil {
-            print("Error: target not found")
+            print("(reload) Error: target not found")
             return
         }
         selectedTarget = targetList[targetIndex!]
@@ -76,19 +76,19 @@ class TaskManagerViewModel: ObservableObject {
             return
         }
         if taskIndex == nil {
-            print("Error: task not found")
+            print("(loadTarget) Error: task not found")
             return
         }
         selectedTask = taskList[taskIndex!]
     }
     
     private func loadTask() {
-        subTaskList = selectedTask!.subTasks
+        subTaskList = selectedTask?.subTasks ?? []
         if selectedSubTask == nil {
             return
         }
         if subTaskIndex == nil {
-            print("Error: subTask not found")
+            print("(loadTask) Error: subTask not found")
             return
         }
         selectedSubTask = subTaskList[subTaskIndex!]
@@ -181,10 +181,11 @@ class TaskManagerViewModel: ObservableObject {
     
     func selectTarget(id: String) {
         guard let index = targetList.indexByID(id) else {
-            print("Error: target not found")
+            print("(selectTarget) Error: target not found")
             return
         }
         selectedTarget = targetList[index]
+        print("target \(selectedTarget!.info.label!) selected")
     }
     
     func selectTask(id: String) {
@@ -196,6 +197,7 @@ class TaskManagerViewModel: ObservableObject {
             return
         }
         selectedTask = taskList[index]
+        print("task \(selectedTask!.info.label!) selected")
     }
     
     func selectSubTask(id: String) {
@@ -203,7 +205,7 @@ class TaskManagerViewModel: ObservableObject {
             return
         }
         guard let index = subTaskList.indexByID(id) else {
-            print("Error: subTask not found")
+            print("(selectSubTask) Error: subTask not found")
             return
         }
         selectedSubTask = subTaskList[index]
@@ -211,10 +213,12 @@ class TaskManagerViewModel: ObservableObject {
     
     func unselectTarget() {
         selectedTarget = nil
+        print("target unselected")
     }
     
     func unselectTask() {
         selectedTask = nil
+        print("task unselected")
     }
     
     func unselectSubTask() {

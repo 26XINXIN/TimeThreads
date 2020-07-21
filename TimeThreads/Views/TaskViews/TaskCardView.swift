@@ -19,6 +19,8 @@ struct TaskCardView: View {
         taskInfo.estimatedTime ?? Time(0)
     }
     
+    var cardType: CardType
+    
     @State var expanded = false
     @State var editing = false
     
@@ -27,12 +29,7 @@ struct TaskCardView: View {
             RoundedRectangle(cornerRadius: self.cardCornerRaduis)
                 .foregroundColor(self.cardColor)
                 .opacity(self.cardOpacity)
-            VStack(spacing: subTaskSpacing) {
-                HeadView()
-                if expanded {
-                    //SubTaskListView()
-                }
-            }
+            HeadView()
         }
             .frame(width: cardWidth, height: cardHeight)
     }
@@ -49,27 +46,36 @@ struct TaskCardView: View {
                     .frame(width: shortcutButtonSize, height: shortcutButtonSize)
                     .aspectRatio(1, contentMode: .fit)
             }
-                
-            NavigationLink(destination: TaskListView(viewModel: viewModel, selectedTargetID: taskID)) {
-                Text(label)
-                    .font(.system(size: lineHeight))
-                    .frame(width: cardWidth - shortcutButtonSize - 2 * edgePaddingSize - spacing, height: lineHeight, alignment: .leading)
-                    .onLongPressGesture {
-                        self.editing = true
-                    }
-//                    .sheet(item: $editing, content: EditingView(taskInfo: taskInfo, viewModel: viewModel)) // TODO
-            }
-            
-//            Image(systemName: "chevron.down.circle")
-//                .opacity(0.6)
-//                .frame(width: shortcutButtonSize, height: shortcutButtonSize)
-//                .aspectRatio(1, contentMode: .fit)
-//                .rotationEffect(expanded ? Angle.degrees(0) : Angle.degrees(-90))
-//                .onTapGesture {
-//                    self.expanded = true
-//                }
+            Text(label)
+                .font(.system(size: lineHeight))
+                .frame(width: maxWidth - 2 * edgePaddingSize - 2 * spacing - 2 * shortcutButtonSize, height: lineHeight, alignment: .leading)
+                .onLongPressGesture {
+                    self.editing = true
+                }
+                .sheet(isPresented: $editing) {
+                    TaskEditingView(taskInfo: self.taskInfo, taskID: self.taskID, viewModel: self.viewModel)
+                }
+            DestinationView()
         }
             .frame(width: cardWidth - 2 * edgePaddingSize, height: lineHeight)
+    }
+    
+    @ViewBuilder
+    private func DestinationView() -> some View {
+        
+        if cardType == .target {
+            NavigationLink(destination: TaskListView(viewModel: viewModel, selectedTargetID: taskID)) {
+                Image(systemName: "chevron.compact.right")
+                .frame(width: shortcutButtonSize, height: shortcutButtonSize)
+                .aspectRatio(1, contentMode: .fit)
+            }
+        } else if cardType == .task {
+            NavigationLink(destination: SubTaskListView(viewModel: viewModel, selectedTaskID: taskID)) {
+                Image(systemName: "chevron.compact.right")
+                .frame(width: shortcutButtonSize, height: shortcutButtonSize)
+                .aspectRatio(1, contentMode: .fit)
+            }
+        }
     }
     
     
@@ -123,6 +129,6 @@ struct TaskCardView_Previews: PreviewProvider {
     static var previews: some View {
         let targetList = [Target.generateTestTask()]
         let viewModel = TaskManagerViewModel(targetList: targetList)
-        return TaskCardView(taskInfo: targetList[0].info, taskID: targetList[0].id, viewModel: viewModel)
+        return TaskCardView(taskInfo: targetList[0].info, taskID: targetList[0].id, viewModel: viewModel, cardType: .target)
     }
 }

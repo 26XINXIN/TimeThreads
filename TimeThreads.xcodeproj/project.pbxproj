@@ -11,6 +11,13 @@
 		A509B14F24C50876001ACB16 /* TargetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509B14E24C50876001ACB16 /* TargetListView.swift */; };
 		A509B15124C54052001ACB16 /* TaskCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509B15024C54052001ACB16 /* TaskCardView.swift */; };
 		A509B15324C56444001ACB16 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509B15224C56444001ACB16 /* TaskListView.swift */; };
+		A509B15A24C63154001ACB16 /* XCTest.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A509B15824C63154001ACB16 /* XCTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A509B16424C63B30001ACB16 /* TimeThreadsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509B16324C63B30001ACB16 /* TimeThreadsTests.swift */; };
+		A509B16B24C63B40001ACB16 /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509B15524C630E3001ACB16 /* ViewModelTests.swift */; };
+		A509B16C24C6428C001ACB16 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A509B15824C63154001ACB16 /* XCTest.framework */; };
+		A509B17224C65566001ACB16 /* SubTaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509B17124C65566001ACB16 /* SubTaskListView.swift */; };
+		A509B17424C660D0001ACB16 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509B17324C660D0001ACB16 /* CardType.swift */; };
+		A509B17624C69813001ACB16 /* TaskEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509B17524C69813001ACB16 /* TaskEditingView.swift */; };
 		A56344D124C2C7AF004D6BFC /* SubTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56344D024C2C7AF004D6BFC /* SubTask.swift */; };
 		A56344D324C2C8C0004D6BFC /* TaskState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56344D224C2C8C0004D6BFC /* TaskState.swift */; };
 		A56344D524C2C9D6004D6BFC /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56344D424C2C9D6004D6BFC /* Time.swift */; };
@@ -27,11 +34,43 @@
 		A5DC725924B27F0300E86A39 /* TaskManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC725824B27F0300E86A39 /* TaskManagerViewModel.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A509B16624C63B30001ACB16 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5DC723424B27D1500E86A39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5DC723B24B27D1500E86A39;
+			remoteInfo = TimeThreads;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A509B15B24C63154001ACB16 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A509B15A24C63154001ACB16 /* XCTest.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		A509B14C24C4FB47001ACB16 /* Array+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Identifiable.swift"; sourceTree = "<group>"; };
 		A509B14E24C50876001ACB16 /* TargetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetListView.swift; sourceTree = "<group>"; };
 		A509B15024C54052001ACB16 /* TaskCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCardView.swift; sourceTree = "<group>"; };
 		A509B15224C56444001ACB16 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		A509B15524C630E3001ACB16 /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
+		A509B15824C63154001ACB16 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		A509B16124C63B30001ACB16 /* TimeThreadsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeThreadsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A509B16324C63B30001ACB16 /* TimeThreadsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeThreadsTests.swift; sourceTree = "<group>"; };
+		A509B16F24C64423001ACB16 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A509B17124C65566001ACB16 /* SubTaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskListView.swift; sourceTree = "<group>"; };
+		A509B17324C660D0001ACB16 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
+		A509B17524C69813001ACB16 /* TaskEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditingView.swift; sourceTree = "<group>"; };
 		A56344D024C2C7AF004D6BFC /* SubTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTask.swift; sourceTree = "<group>"; };
 		A56344D224C2C8C0004D6BFC /* TaskState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskState.swift; sourceTree = "<group>"; };
 		A56344D424C2C9D6004D6BFC /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
@@ -52,6 +91,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A509B15E24C63B30001ACB16 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A509B16C24C6428C001ACB16 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5DC723924B27D1500E86A39 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -66,9 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				A5DC724624B27D1500E86A39 /* ContentView.swift */,
-				A509B14E24C50876001ACB16 /* TargetListView.swift */,
-				A509B15224C56444001ACB16 /* TaskListView.swift */,
-				A509B15024C54052001ACB16 /* TaskCardView.swift */,
+				A51FF04524C6A59200A0E6BA /* TaskViews */,
+				A51FF04624C6A5B900A0E6BA /* SupportingViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -85,8 +131,53 @@
 			isa = PBXGroup;
 			children = (
 				A509B14C24C4FB47001ACB16 /* Array+Identifiable.swift */,
+				A509B17324C660D0001ACB16 /* CardType.swift */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		A509B15424C630B6001ACB16 /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Testing;
+			sourceTree = "<group>";
+		};
+		A509B15724C63154001ACB16 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A509B15824C63154001ACB16 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A509B16224C63B30001ACB16 /* TimeThreadsTests */ = {
+			isa = PBXGroup;
+			children = (
+				A509B15524C630E3001ACB16 /* ViewModelTests.swift */,
+				A509B16324C63B30001ACB16 /* TimeThreadsTests.swift */,
+				A509B16F24C64423001ACB16 /* Info.plist */,
+			);
+			path = TimeThreadsTests;
+			sourceTree = "<group>";
+		};
+		A51FF04524C6A59200A0E6BA /* TaskViews */ = {
+			isa = PBXGroup;
+			children = (
+				A509B14E24C50876001ACB16 /* TargetListView.swift */,
+				A509B15224C56444001ACB16 /* TaskListView.swift */,
+				A509B17124C65566001ACB16 /* SubTaskListView.swift */,
+				A509B15024C54052001ACB16 /* TaskCardView.swift */,
+			);
+			path = TaskViews;
+			sourceTree = "<group>";
+		};
+		A51FF04624C6A5B900A0E6BA /* SupportingViews */ = {
+			isa = PBXGroup;
+			children = (
+				A509B17524C69813001ACB16 /* TaskEditingView.swift */,
+			);
+			path = SupportingViews;
 			sourceTree = "<group>";
 		};
 		A563450524C41DA2004D6BFC /* Model */ = {
@@ -104,8 +195,11 @@
 		A5DC723324B27D1500E86A39 = {
 			isa = PBXGroup;
 			children = (
+				A509B15424C630B6001ACB16 /* Testing */,
 				A5DC723E24B27D1500E86A39 /* TimeThreads */,
+				A509B16224C63B30001ACB16 /* TimeThreadsTests */,
 				A5DC723D24B27D1500E86A39 /* Products */,
+				A509B15724C63154001ACB16 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				A5DC723C24B27D1500E86A39 /* TimeThreads.app */,
+				A509B16124C63B30001ACB16 /* TimeThreadsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,6 +243,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A509B16024C63B30001ACB16 /* TimeThreadsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A509B16824C63B30001ACB16 /* Build configuration list for PBXNativeTarget "TimeThreadsTests" */;
+			buildPhases = (
+				A509B15D24C63B30001ACB16 /* Sources */,
+				A509B15E24C63B30001ACB16 /* Frameworks */,
+				A509B15F24C63B30001ACB16 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A509B16724C63B30001ACB16 /* PBXTargetDependency */,
+			);
+			name = TimeThreadsTests;
+			productName = TimeThreadsTests;
+			productReference = A509B16124C63B30001ACB16 /* TimeThreadsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A5DC723B24B27D1500E86A39 /* TimeThreads */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5DC725324B27D1A00E86A39 /* Build configuration list for PBXNativeTarget "TimeThreads" */;
@@ -155,6 +268,7 @@
 				A5DC723824B27D1500E86A39 /* Sources */,
 				A5DC723924B27D1500E86A39 /* Frameworks */,
 				A5DC723A24B27D1500E86A39 /* Resources */,
+				A509B15B24C63154001ACB16 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -171,10 +285,14 @@
 		A5DC723424B27D1500E86A39 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1150;
+				LastSwiftUpdateCheck = 1160;
 				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "杨鑫";
 				TargetAttributes = {
+					A509B16024C63B30001ACB16 = {
+						CreatedOnToolsVersion = 11.6;
+						TestTargetID = A5DC723B24B27D1500E86A39;
+					};
 					A5DC723B24B27D1500E86A39 = {
 						CreatedOnToolsVersion = 11.5;
 					};
@@ -194,11 +312,19 @@
 			projectRoot = "";
 			targets = (
 				A5DC723B24B27D1500E86A39 /* TimeThreads */,
+				A509B16024C63B30001ACB16 /* TimeThreadsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A509B15F24C63B30001ACB16 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5DC723A24B27D1500E86A39 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -212,14 +338,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A509B15D24C63B30001ACB16 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A509B16B24C63B40001ACB16 /* ViewModelTests.swift in Sources */,
+				A509B16424C63B30001ACB16 /* TimeThreadsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5DC723824B27D1500E86A39 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A509B17424C660D0001ACB16 /* CardType.swift in Sources */,
 				A5DC725924B27F0300E86A39 /* TaskManagerViewModel.swift in Sources */,
 				A5DC724024B27D1500E86A39 /* AppDelegate.swift in Sources */,
 				A509B15324C56444001ACB16 /* TaskListView.swift in Sources */,
 				A5DC724524B27D1500E86A39 /* TimeThreads.xcdatamodeld in Sources */,
+				A509B17224C65566001ACB16 /* SubTaskListView.swift in Sources */,
 				A509B14D24C4FB47001ACB16 /* Array+Identifiable.swift in Sources */,
 				A56344D124C2C7AF004D6BFC /* SubTask.swift in Sources */,
 				A563450924C41E86004D6BFC /* Task.swift in Sources */,
@@ -228,6 +365,7 @@
 				A59253F824B92DCD00A5CAF9 /* Target.swift in Sources */,
 				A563450424C41D22004D6BFC /* TaskInfo.swift in Sources */,
 				A5DC724724B27D1500E86A39 /* ContentView.swift in Sources */,
+				A509B17624C69813001ACB16 /* TaskEditingView.swift in Sources */,
 				A56344D524C2C9D6004D6BFC /* Time.swift in Sources */,
 				A5DC724224B27D1500E86A39 /* SceneDelegate.swift in Sources */,
 				A509B15124C54052001ACB16 /* TaskCardView.swift in Sources */,
@@ -235,6 +373,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A509B16724C63B30001ACB16 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5DC723B24B27D1500E86A39 /* TimeThreads */;
+			targetProxy = A509B16624C63B30001ACB16 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A5DC724D24B27D1A00E86A39 /* LaunchScreen.storyboard */ = {
@@ -248,6 +394,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A509B16924C63B30001ACB16 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9D48P5VY4Z;
+				INFOPLIST_FILE = TimeThreadsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = XinYang.TimeThreadsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TimeThreads.app/TimeThreads";
+			};
+			name = Debug;
+		};
+		A509B16A24C63B30001ACB16 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9D48P5VY4Z;
+				INFOPLIST_FILE = TimeThreadsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = XinYang.TimeThreadsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TimeThreads.app/TimeThreads";
+			};
+			name = Release;
+		};
 		A5DC725124B27D1A00E86A39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -369,6 +557,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TimeThreads/Preview Content\"";
 				DEVELOPMENT_TEAM = 9D48P5VY4Z;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TimeThreads/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -389,6 +578,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TimeThreads/Preview Content\"";
 				DEVELOPMENT_TEAM = 9D48P5VY4Z;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TimeThreads/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -405,6 +595,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A509B16824C63B30001ACB16 /* Build configuration list for PBXNativeTarget "TimeThreadsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A509B16924C63B30001ACB16 /* Debug */,
+				A509B16A24C63B30001ACB16 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A5DC723724B27D1500E86A39 /* Build configuration list for PBXProject "TimeThreads" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
