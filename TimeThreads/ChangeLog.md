@@ -17,7 +17,7 @@
 - [x] Refraine Base struct to support further development and modifications
 - [x] organized navigation views 
 - [x] solve the update problem of targetList, taskList and subTaskList
-- [ ] drag and drop of the subTasks
-- [ ] deleting subTask
-- [ ] Interaction of tasks: new, move, delete
+- [x] deleting subTask
+- [ ] interaction of tasks: move
+- [ ] mark task as done
 - [ ] Add time consuming estimation on Tasks and related views

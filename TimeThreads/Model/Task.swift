@@ -71,7 +71,7 @@ struct Task: Identifiable, Codable {
     
     mutating func update(info: TaskInfo) {
         // If has subTask, estimated time is immutable
-        self.info = info
+        self.info = info // TODO: estimated Time
     }
     
     mutating func addSubTask(info: TaskInfo) {

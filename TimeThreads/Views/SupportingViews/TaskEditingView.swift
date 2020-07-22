@@ -10,17 +10,21 @@ import SwiftUI
 
 struct TaskEditingView: View {
     @State var label: String = ""
-    @State var estimatedTime: String = ""
+//    @State var estimatedTime: Time = Time(0)
     @State var done: Bool = false
     
     var taskInfo: TaskInfo
-    var taskID: String
+    var taskID: String?
     @ObservedObject var viewModel: TaskManagerViewModel
+    var cardType: CardType
+    @Binding var isPresented: Bool
     
-    init(taskInfo: TaskInfo, taskID: String, viewModel: TaskManagerViewModel) {
+    init(taskInfo: TaskInfo, taskID: String?, viewModel: TaskManagerViewModel, cardType: CardType, isPresented: Binding<Bool>) {
         self.taskInfo = taskInfo
         self.taskID = taskID
         self.viewModel = viewModel
+        self.cardType = cardType
+        self._isPresented = isPresented
         self.label = taskInfo.label ?? "Unknown"
 //        self.estimatedTime = taskInfo.estimatedTime ?? Time(0)
         self.done = taskInfo.done
@@ -33,13 +37,13 @@ struct TaskEditingView: View {
                 .foregroundColor(Color.black)
                 .font(.system(size: 50))
                 .padding(.vertical, 10)
-            ScrollView(.vertical) {
-                TextField("Time", text: $estimatedTime)
-                    .foregroundColor(Color.black)
-                    .font(.system(size: lineHeight))
-            }
+//            ScrollView(.vertical) {
+//                TextField("Time", text: $estimatedTime)
+//                    .foregroundColor(Color.black)
+//                    .font(.system(size: lineHeight))
+//            }
             HStack() {
-                Button(action: {}) {
+                Button(action: { self.acceptChanges() }) {
                     HStack {
                         Image(systemName: "checkmark")
                         Text("Accept")
@@ -50,10 +54,10 @@ struct TaskEditingView: View {
                         .cornerRadius(40)
                         .font(.system(size:26))
                 }
-                Button(action: {}) {
+                Button(action: { self.discardChanges() }) {
                     HStack {
                         Image(systemName: "xmark")
-                        Text("Discard")
+                        Text("Cancel")
                     }
                         .padding()
                         .foregroundColor(.white)
@@ -68,6 +72,34 @@ struct TaskEditingView: View {
         
     }
     
+    private func acceptChanges() {
+        let info = TaskInfo(label: label)
+        if let id = taskID { // updating
+            switch cardType {
+            case .target:
+                viewModel.updateTarget(info: info, of: id)
+            case .task:
+                viewModel.updateTask(info: info, of: id)
+            case .subTask:
+                viewModel.updateSubTask(info: info, of: id)
+            }
+        } else {
+            switch cardType {
+            case .target:
+                viewModel.addTarget(info: info)
+            case .task:
+                viewModel.addTask(info: info)
+            case .subTask:
+                viewModel.addSubTask(info: info)
+            }
+        }
+        self.isPresented = false
+    }
+    
+    private func discardChanges() {
+        self.isPresented = false
+    }
+    
     private let lineHeight: CGFloat = 32
     
     private let edgePaddingSize: CGFloat = 14
@@ -79,6 +111,6 @@ struct TaskEditingView_Previews: PreviewProvider {
         let target = Target.generateTestTask()
         let viewModel = TaskManagerViewModel(targetList: [target])
         let taskInfo = TaskInfo(label: "Test", estimatedTime: Time(80), done: false, progress: 0)
-        return TaskEditingView(taskInfo: taskInfo, taskID: "1", viewModel: viewModel)
+        return TaskEditingView(taskInfo: taskInfo, taskID: "1", viewModel: viewModel, cardType: .target, isPresented: Binding.constant(false))
     }
 }

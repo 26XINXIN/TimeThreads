@@ -51,6 +51,10 @@ struct Target: Identifiable, Codable {
         tasks[index].addSubTask(info: info)
     }
     
+    mutating func update(info: TaskInfo) {
+        self.info = info // TODO: estimatedTime
+    }
+    
     mutating func updateTask(info: TaskInfo, of task: String) {
         guard let index = indexOf(task) else {
             print("Error: task not found")

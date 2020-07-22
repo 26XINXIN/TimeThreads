@@ -12,6 +12,8 @@ struct SubTaskListView: View {
     @ObservedObject var viewModel: TaskManagerViewModel
     var selectedTaskID: String
     
+    @State var addingNewTask: Bool = false
+    
     init(viewModel: TaskManagerViewModel, selectedTaskID: String) {
         self.viewModel = viewModel
         self.selectedTaskID = selectedTaskID
@@ -27,6 +29,14 @@ struct SubTaskListView: View {
             
         }
             .navigationBarTitle(Text(viewModel.selectedTask?.info.label ?? ""))
+            .navigationBarItems(trailing:
+                Button(action: { self.addingNewTask = true }) {
+                    Image(systemName: "plus")
+                }
+            )
+                .sheet(isPresented: $addingNewTask) {
+                    TaskEditingView(taskInfo: TaskInfo(), taskID: nil, viewModel: self.viewModel, cardType: .subTask, isPresented: self.$addingNewTask)
+                }
             .onAppear {
                 self.viewModel.selectTask(id: self.selectedTaskID)
             }

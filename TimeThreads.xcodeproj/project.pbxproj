@@ -24,6 +24,8 @@
 		A563450424C41D22004D6BFC /* TaskInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A563450324C41D22004D6BFC /* TaskInfo.swift */; };
 		A563450924C41E86004D6BFC /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A563450824C41E86004D6BFC /* Task.swift */; };
 		A59253F824B92DCD00A5CAF9 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59253F724B92DCD00A5CAF9 /* Target.swift */; };
+		A5A80E1724C8CA44008597EE /* SlidableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A80E1624C8CA44008597EE /* SlidableModifier.swift */; };
+		A5A80E1924C8CD03008597EE /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A80E1824C8CD03008597EE /* Slot.swift */; };
 		A5DC724024B27D1500E86A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC723F24B27D1500E86A39 /* AppDelegate.swift */; };
 		A5DC724224B27D1500E86A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC724124B27D1500E86A39 /* SceneDelegate.swift */; };
 		A5DC724524B27D1500E86A39 /* TimeThreads.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5DC724324B27D1500E86A39 /* TimeThreads.xcdatamodeld */; };
@@ -77,6 +79,8 @@
 		A563450324C41D22004D6BFC /* TaskInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskInfo.swift; sourceTree = "<group>"; };
 		A563450824C41E86004D6BFC /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		A59253F724B92DCD00A5CAF9 /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
+		A5A80E1624C8CA44008597EE /* SlidableModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidableModifier.swift; sourceTree = "<group>"; };
+		A5A80E1824C8CD03008597EE /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
 		A5BC9A4F24B2FD5C00965C9A /* ChangeLog.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ChangeLog.md; sourceTree = "<group>"; };
 		A5DC723C24B27D1500E86A39 /* TimeThreads.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeThreads.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5DC723F24B27D1500E86A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -176,6 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				A509B17524C69813001ACB16 /* TaskEditingView.swift */,
+				A5A80E1624C8CA44008597EE /* SlidableModifier.swift */,
+				A5A80E1824C8CD03008597EE /* Slot.swift */,
 			);
 			path = SupportingViews;
 			sourceTree = "<group>";
@@ -354,8 +360,10 @@
 				A509B17424C660D0001ACB16 /* CardType.swift in Sources */,
 				A5DC725924B27F0300E86A39 /* TaskManagerViewModel.swift in Sources */,
 				A5DC724024B27D1500E86A39 /* AppDelegate.swift in Sources */,
+				A5A80E1924C8CD03008597EE /* Slot.swift in Sources */,
 				A509B15324C56444001ACB16 /* TaskListView.swift in Sources */,
 				A5DC724524B27D1500E86A39 /* TimeThreads.xcdatamodeld in Sources */,
+				A5A80E1724C8CA44008597EE /* SlidableModifier.swift in Sources */,
 				A509B17224C65566001ACB16 /* SubTaskListView.swift in Sources */,
 				A509B14D24C4FB47001ACB16 /* Array+Identifiable.swift in Sources */,
 				A56344D124C2C7AF004D6BFC /* SubTask.swift in Sources */,

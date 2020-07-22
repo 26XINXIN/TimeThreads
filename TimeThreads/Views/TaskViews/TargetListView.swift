@@ -11,6 +11,8 @@ import SwiftUI
 struct TargetListView: View {
     @ObservedObject var viewModel: TaskManagerViewModel
     
+    @State var addingNewTask = false
+    
     init(viewModel: TaskManagerViewModel) {
         self.viewModel = viewModel
     }
@@ -18,15 +20,25 @@ struct TargetListView: View {
     var body: some View {
         NavigationView {
             ScrollView(.vertical) {
-                ForEach(viewModel.targetList, id: \.id) { target in
-                    TaskCardView(taskInfo: target.info, taskID: target.id, viewModel: self.viewModel, cardType: .target)
-                }
+                    ForEach(viewModel.targetList, id: \.id) { target in
+                        TaskCardView(taskInfo: target.info, taskID: target.id, viewModel: self.viewModel, cardType: .target)
+                        // Text(target.info.label ?? "Unknown")
+                    }
             }
             .navigationBarTitle(Text("Targets"))
-            .onAppear {
-                self.viewModel.unselectTarget()
-            }
+            .navigationBarItems(trailing:
+                Button(action: { self.addingNewTask = true }) {
+                    Image(systemName: "plus")
+                }
+            )
+                .sheet(isPresented: $addingNewTask) {
+                    TaskEditingView(taskInfo: TaskInfo(), taskID: nil, viewModel: self.viewModel, cardType: .target, isPresented: self.$addingNewTask)
+                }
         }
+        .onAppear {
+            self.viewModel.unselectTarget()
+        }
+        .animation(.spring())
     }
 }
 

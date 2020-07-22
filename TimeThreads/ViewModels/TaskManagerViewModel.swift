@@ -130,11 +130,24 @@ class TaskManagerViewModel: ObservableObject {
         targetList[targetIndex!].addTask(info: info)
     }
     
+    func addTarget(info: TaskInfo) {
+        let newTarget = Target(info: info)
+        targetList.append(newTarget)
+    }
+    
     func addSubTask(info: TaskInfo) {
         if !isValidTarget() && !isValidTask() {
             return
         }
         targetList[targetIndex!].addSubTask(info: info, of: selectedTask!.id)
+    }
+    
+    func removeTarget(id: String) {
+        guard let index = targetList.indexByID(id) else {
+            print("Error: target not found")
+            return
+        }
+        targetList.remove(at: index)
     }
     
     func removeTask(id: String) {
@@ -163,6 +176,14 @@ class TaskManagerViewModel: ObservableObject {
             return
         }
         targetList[targetIndex!].moveSubTask(id: id, before: successor, of: selectedTask!.id)
+    }
+    
+    func updateTarget(info: TaskInfo, of id: String) {
+        guard let index = targetList.indexByID(id) else {
+            print("Error: target not found")
+            return
+        }
+        targetList[index].update(info: info)
     }
     
     func updateTask(info: TaskInfo, of id: String) {
